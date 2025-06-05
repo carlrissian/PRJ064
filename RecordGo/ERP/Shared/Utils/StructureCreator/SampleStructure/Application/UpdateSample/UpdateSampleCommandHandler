@@ -1,0 +1,25 @@
+<?php
+
+namespace SampleNamespace;
+
+class UpdateSampleCommandHandler
+{
+
+    /**
+     * @var SampleRepository
+     */
+    private $sampleRepository;
+    
+    public function __construct(SampleRepository $sampleRepository){
+
+        $this->sampleRepository = $sampleRepository;
+    }
+
+    public function handle(UpdateSampleCommand $command): UpdateSampleResponse{
+
+        $sampleIdentifier = $command->getSampleIdentifier();
+        $sample = $this->sampleRepository->getBySampleIdentifier($sampleIdentifier);
+
+        return new UpdateSampleResponse();
+    }
+}

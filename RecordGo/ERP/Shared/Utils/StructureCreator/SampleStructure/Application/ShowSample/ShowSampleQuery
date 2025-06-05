@@ -1,0 +1,23 @@
+<?php
+
+namespace SampleNamespace;
+
+class ShowSampleQuery
+{
+
+    private $sampleIdentifier;
+
+    public function __construct(int $sampleIdentifier)
+    {
+        $this->sampleIdentifier = $sampleIdentifier;
+    }
+
+    /**
+     * @return int
+     */
+    public function getSampleIdentifier(): int
+    {
+        return $this->sampleIdentifier;
+    }
+
+}

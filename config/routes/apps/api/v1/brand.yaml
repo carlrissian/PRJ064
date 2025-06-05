@@ -1,0 +1,5 @@
+selectList:
+  path: /selectlist
+  controller: App\Apps\Api\Brand\SelectListBrandController
+  options:
+    expose: true

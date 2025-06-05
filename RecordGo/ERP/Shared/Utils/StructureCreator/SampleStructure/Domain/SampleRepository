@@ -1,0 +1,31 @@
+<?php
+
+namespace SampleNamespace;
+
+interface SampleRepository
+{
+
+    /**
+     * @param SampleCriteria $criteria
+     * @return SampleGetByResponse
+     */
+    public function getBy(SampleCriteria $criteria): SampleGetByResponse;
+
+    /**
+     * @param int $sampleIdentifier
+     * @return Sample
+     */
+    public function getBySampleIdentifier(int $sampleIdentifier):Sample;
+
+    /**
+     * @param Sample $sample
+     * @return Sample
+     */
+    public function store(Sample $sample): Sample;
+
+    /**
+     * @param Sample $sample
+     * @return Sample
+     */
+    public function update(Sample $sample): Sample;
+}

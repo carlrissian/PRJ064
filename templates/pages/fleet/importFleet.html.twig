@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Import Fleet" | trans) }}{% endblock %}
+
+{% block body %}
+    <fleet-import-page></fleet-import-page>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let translations = {
+            titles: {
+                title: '{{ 'Import fleet' | trans }}',
+                header: '{{ 'Import Fleet vehicles to Database' | trans }}',
+            },
+            fields: {
+                notes: '{{ 'Notas' | trans }}',
+            },
+            form: {
+                import: '{{ 'Import excel' | trans }}',
+                importedVehicles: '{{ 'Imported vehicles' | trans }}',
+                notImportedVehicles: '{{ 'Not imported vehicles' | trans }}',
+                errorsFromSAP: '{{ 'Errors emmited from SAP' | trans }}',
+                line: '{{ 'Line' | trans }}',
+                excelLines: '{{ 'Excel lines' | trans }}',
+                showMessages: '{{ 'Show messages' | trans }}',
+                downloadMessages: '{{ 'Download messages' | trans }}',
+
+                errorOnRequest: '{{ 'Error during request' | trans }}',
+                errorImportFleetNotification: '{{ 'There was an error during import fleet' | trans }}',
+                importFleetSuccessNotification: '{{ 'Fleet imported successfully' | trans }}',
+            },
+        }
+    </script>
+{% endblock %}

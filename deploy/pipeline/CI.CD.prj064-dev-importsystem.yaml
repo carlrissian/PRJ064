@@ -1,0 +1,114 @@
+trigger:
+  batch: true
+  branches:
+    include:
+      - develop
+  paths:
+    exclude:
+      - test/*
+      - bin/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - name: KubernetesNamespace
+    value: 'prj064-dev-importsystem'
+  - group: 'Azure Configuration'
+
+stages:
+  - stage: Build
+    displayName: Build
+    jobs:
+      - job: Build
+        displayName: Build Docker
+        steps:
+          - checkout: self
+            submodules: true
+            persistCredentials: true
+
+          - task: Docker@2
+            displayName: 'Build prj064-dev-importsystem image'
+            inputs:
+              containerRegistry: $(DockerRegistryServiceConnection)
+              repository: 'prj064-dev-importsystem-app'
+              command: 'build'
+              tags: $(Build.BuildId)
+              Dockerfile: '$(Build.SourcesDirectory)/Dockerfile-dev'
+            condition: succeeded()
+
+          - task: Docker@2
+            displayName: 'Push prj064-dev-importsystem image'
+            inputs:
+              containerRegistry: $(DockerRegistryServiceConnection)
+              repository: 'prj064-dev-importsystem-app'
+              command: 'push'
+              tags: $(Build.BuildId)
+            condition: succeeded()
+
+  - stage: Deploy
+    displayName: Deploy
+    dependsOn: Build
+    jobs:
+      - job: Deploy
+        displayName: Deploy in AKS
+        steps:
+          - task: replacetokens@5
+            displayName: Replace Tokens
+            inputs:
+              rootDirectory: '$(Build.SourcesDirectory)/deploy/dev-aks'
+              targetFiles: '**/*.yaml'
+              encoding: 'auto'
+              tokenPattern: 'rm'
+              writeBOM: true
+              actionOnMissing: 'warn'
+              keepToken: false
+              actionOnNoFiles: 'continue'
+              enableTransforms: false
+              enableRecursion: false
+              useLegacyPattern: false
+              enableTelemetry: true
+
+            # Descargar el archivo kubeconfig seguro
+          - task: DownloadSecureFile@1
+            name: DownloadKubeconfig
+            inputs:
+              secureFile: kubeconfig-recordgo.yaml
+
+            # Aplicar todos los manifiestos
+          - script: |
+              export KUBECONFIG=$(DownloadKubeconfig.secureFilePath)
+              echo "Aplicando manifiestos..."
+              kubectl apply -f $(Build.SourcesDirectory)/deploy/dev-aks/
+            displayName: 'Aplicar manifiestos al clúster'
+
+          - script: |
+              export KUBECONFIG=$(DownloadKubeconfig.secureFilePath)
+              echo "Configuration, service and deployment"
+              kubectl apply -f $(Build.SourcesDirectory)/deploy/dev-aks/namespace.yaml -f $(Build.SourcesDirectory)/deploy/dev-aks/configuration.yaml -f $(Build.SourcesDirectory)/deploy/dev-aks/volume.yaml -f $(Build.SourcesDirectory)/deploy/dev-aks/service.yaml -f $(Build.SourcesDirectory)/deploy/dev-aks/deployment.yaml
+            displayName: 'Configuration, service and deployment'
+
+          - script: |
+              export KUBECONFIG=$(DownloadKubeconfig.secureFilePath)
+              echo "Ingress...."
+              kubectl apply -f $(Build.SourcesDirectory)/deploy/dev-aks/ingress.yaml
+            displayName: 'Ingress'
+
+            # Reaplicar TLS secret
+          - script: |
+              export KUBECONFIG=$(DownloadKubeconfig.secureFilePath)
+              echo "Reaplicando tls-secret-csi..."
+              kubectl get secret tls-secret-csi --namespace=ingress-nginx -o yaml \
+                | sed '/creationTimestamp/d' \
+                | sed '/namespace/d' \
+                | sed '/resourceVersion/d' \
+                | sed '/labels/d' \
+                | sed '/secrets-store.csi.k8s.io/d' \
+                | sed '/ownerReferences/d' \
+                | sed '/- apiVersion/d' \
+                | sed '/kind: SecretProviderClassPodStatus/{N;d;}' \
+                | sed '/kind: ReplicaSet/{N;d;}' \
+                | sed '/uid/d' > $(Build.SourcesDirectory)/deploy/dev-aks/tls-secret-csi.yaml
+              
+              kubectl apply -f $(Build.SourcesDirectory)/deploy/dev-aks/tls-secret-csi.yaml -n $(KubernetesNamespace)
+            displayName: 'Reaplicar TLS secret'

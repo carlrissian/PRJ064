@@ -1,0 +1,23 @@
+<?php
+
+namespace SampleNamespace;
+
+class StoreSampleCommandHandler
+{
+
+    /**
+     * @var SampleRepository
+     */
+    private $sampleRepository;
+
+    public function __construct(SampleRepository $sampleRepository){
+
+        $this->sampleRepository = $sampleRepository;
+    }
+
+    public function handle(StoreSampleCommand $command): StoreSampleResponse{
+
+
+        return new StoreSampleResponse();
+    }
+}

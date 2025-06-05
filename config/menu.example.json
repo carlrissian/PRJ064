@@ -1,0 +1,131 @@
+[
+    {
+        "name": "Distribución",
+        "type": "title"
+    },
+    {
+        "name": "Movimientos",
+        "icon": "la la-angle-double-right",
+        "type": "submenu",
+        "submenu": [
+            {
+                "name": "Crear",
+                "route": ["pagina.ejemplo1", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "submenu",
+                "submenu":  [
+                    {
+                        "name": "Por conductor",
+                        "route": ["movement.driver",[], true],
+                        "icon": "la la-angle-double-right",
+                        "type": "element"
+                    },
+                    {
+                        "name": "Por transportista",
+                        "route": ["movement.carrier",[], true],
+                        "icon": "la la-angle-double-right",
+                        "type": "element"
+                    }
+                ]
+            },
+            {
+                "name": "Consultar",
+                "route": ["movement.search",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            }
+        ]
+    },
+    {
+        "name": "Vehículos",
+        "icon": "la la-angle-double-right",
+        "type": "submenu",
+        "submenu": [
+            {
+                "name": "Crear",
+                "route": ["pagina.ejemplo1", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "submenu",
+                "submenu":  [
+                    {
+                        "name": "Consultar",
+                        "route": ["car.filter",[], true],
+                        "icon": "la la-angle-double-right",
+                        "type": "element"
+                    },
+                    {
+                        "name": "Listar",
+                        "route": ["car.list",[], true],
+                        "icon": "la la-angle-double-right",
+                        "type": "element"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Stop sales",
+        "icon": "la la-angle-double-right",
+        "type": "submenu",
+        "submenu": [
+            {
+                "name": "Stop sales",
+                "route": ["stopSale.create", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "One way",
+                "route": ["oneWay.create", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            }
+        ]
+    },
+    {
+        "name": "Disponibilad por grupo",
+        "route": ["availability", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    },
+    {
+        "name": "Grupos",
+        "type": "title"
+    },
+    {
+        "name": "Configuración parámetros",
+        "route": ["pagina.ejemplo1",[], true],
+        "icon": "la la-angle-double-right",
+        "type": "submenu",
+        "submenu": [
+            {
+                "name": "Crear",
+                "route": ["parameter_settings.create", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Listar",
+                "route": ["pagina.ejemplo1", [], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            }
+        ]
+    },
+    {
+        "name": "Temporadas",
+        "route": ["season", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    },
+    {
+        "name": "Gestión",
+        "type": "title"
+    },
+    {
+        "name": "Localización",
+        "route": ["location.create", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    }
+]

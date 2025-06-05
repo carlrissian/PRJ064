@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Ver sample" | trans) }}{% endblock %}
+
+{% block body %}
+    <show-sample-page :sampleIdentifier="{{ sampleIdentifier }}" :sample="{{ sample }}"/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+       
+    </script>
+{% endblock %}

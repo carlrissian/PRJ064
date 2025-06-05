@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Export Fleet" | trans) }}{% endblock %}
+
+{% block body %}
+    <fleet-export-page></fleet-export-page>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let translations = {
+            titles: {
+                title: '{{ 'Export fleet' | trans }}',
+                header: '{{ 'Export database information fleet vehicles to Excel ' | trans }}',
+            },
+            fields: {
+                provider: '{{ 'Purchasing provider' | trans }}',
+                bbCustomer: '{{ 'Buyback provider' | trans }}',
+                purchaseType: '{{ 'Purchase type' | trans }}',
+                saleMethod: '{{ 'Sale method' | trans }}',
+                brand: '{{ 'Brand' | trans }}',
+                model: '{{ 'Model' | trans }}',
+                trim: '{{ 'Trim' | trans }}',
+                carGroup: '{{ 'Car group' | trans }}',
+                vehicleType: '{{ 'Vehicle type' | trans }}',
+                acriss: '{{ 'ACRISS' | trans }}',
+                gearBox: '{{ 'Gear box' | trans }}',
+                motorizationType: '{{ 'Motorization type' | trans }}',
+                firstRegistrationDateFrom: '{{ 'First registration date from' | trans }}',
+                firstRegistrationDateTo: '{{ 'First registration date to' | trans }}',
+                lastRegistrationDateFrom: '{{ 'Last registration date from' | trans }}',
+                lastRegistrationDateTo: '{{ 'Last registration date to' | trans }}',
+                deliveryDateFrom: '{{ 'Delivery date from' | trans }}',
+                deliveryDateTo: '{{ 'Delivery date to' | trans }}',
+                returnDateFrom: '{{ 'Return date from' | trans }}',
+                returnDateTo: '{{ 'Return date to' | trans }}',
+                firstRentDateFrom: '{{ 'First rent date from' | trans }}',
+                firstRentDateTo: '{{ 'First rent date to' | trans }}',
+                rentingEndDateFrom: '{{ 'Renting end date from' | trans }}',
+                rentingEndDateTo: '{{ 'Renting end date to' | trans }}',
+                receptionLocation: '{{ 'Reception location' | trans }}',
+                vehicleStatus: '{{ 'Vehicle status' | trans }}',
+                actualLocation: '{{ 'Actual location' | trans }}',
+                creationDateFrom: '{{ 'Creation date from' | trans }}',
+                creationDateTo: '{{ 'Creation date to' | trans }}',
+                operative: '{{ 'Only operative' | trans }}',
+                noLicensePlate: '{{ 'Without license plate' | trans }}',
+            },
+            form: {
+                export: '{{ 'Export' | trans }}',
+
+                fleetExportedSuccessNotification: '{{ 'Fleet exported successfully' | trans }}',
+                errorOnRequest: '{{ 'Error during request' | trans }}',
+            },
+        }
+    </script>
+{% endblock %}

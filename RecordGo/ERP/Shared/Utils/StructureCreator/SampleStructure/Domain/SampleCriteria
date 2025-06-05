@@ -1,0 +1,19 @@
+<?php
+
+namespace SampleNamespace;
+
+use Shared\Domain\Criteria\Criteria;
+
+class SampleCriteria extends Criteria
+{
+
+    /**
+     * @inheritDoc
+     */
+    public function getAllowedFields(): array
+    {
+        return [
+
+        ];
+    }
+}

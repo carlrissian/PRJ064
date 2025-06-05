@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/img/favicon.svg?1" type="image/vnd.microsoft.icon" sizes="32x32">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700"]
+            },
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <style>
+        #loading-image {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            z-index: 9999999;
+            width: 100px;
+        }
+    </style>
+
+    {% if app.request.server.get('APP_ENV') == 'local' %}
+        <style>
+            .kt-aside, .kt-aside__brand, .kt-aside-menu, .kt-header-mobile {
+                background-color: #2375d0 !important;
+            }
+        </style>
+    {% endif %}
+
+    {% if app.request.server.get('APP_ENV') == 'dev' %}
+        <style>
+            .kt-aside, .kt-aside__brand, .kt-aside-menu, .kt-header-mobile {
+                background-color: #1c4e85 !important;
+            }
+        </style>
+    {% endif %}
+
+    {% if app.request.server.get('APP_ENV') == 'pre' %}
+        <style>
+            .kt-aside, .kt-aside__brand, .kt-aside-menu, .kt-header-mobile {
+                background-color: #28a745 !important;
+            }
+        </style>
+    {% endif %}
+
+    {{ encore_entry_link_tags('app') }}
+    {% block stylesheets %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+</head>
+<body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-aside--enabled kt-aside--fixed kt-page--loading">
+<div id="loading" style="display: none">
+    <img id="loading-image" src="{{ asset('img/loading.gif') }}" alt="Cargando..." />
+</div>
+{% include 'partials/header/menu/menu_mobile_button.html.twig' %}
+<div class="kt-grid kt-grid--hor kt-grid--root">
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+        {% include 'partials/header/menu/menu_lateral.html.twig' %}
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
+            {% include 'partials/header/menu/menu_top.blade.html.twig' %}
+            <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+                <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="app">
+                    {% for key, messages in app.flashes %}
+                        <div class="alert alert-custom alert-{{ key }} fade show" role="alert">
+                            <div class="alert-icon"><i class="flaticon-warning"></i></div>
+                            {% for message in messages %}
+                                <div class="alert-text">{{ message }}</div>
+                            {% endfor %}
+                            <div class="alert-close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="icon-xl la la-close"></i></span>
+                                </button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
+            {#                {% include 'partials/footer/footer.html.twig' %}#}
+        </div>
+    </div>
+</div>
+<div id="kt_scrolltop" class="kt-scrolltop">
+    <i class="fa fa-arrow-up"></i>
+</div>
+{{ encore_entry_script_tags('app') }}
+<script>
+    let msg = {
+        filter: {
+            filterTitle: '{{ 'Filter list' | trans }}',
+            filterButtonDeleteAll: '{{ 'Remove filters' | trans }}',
+            filterSearch: '{{ 'Search' | trans }}',
+            filter: '{{ 'Filters' | trans }}',
+            selectAnOption: '{{ 'Select an option' | trans }}',
+            nothingSelected: '{{ 'Nothing selected' | trans }}',
+            yes: '{{ 'Yes' | trans }}',
+            no: '{{ 'No' | trans }}',
+        }
+    };
+    let KTAppOptions = {
+        "colors": {
+            "state": {
+                "brand": "#cf2d30",
+                "dark": "#282a3c",
+                "light": "#ffffff",
+                "primary": "#cf2d30",
+                "success": "#34bfa3",
+                "info": "#36a3f7",
+                "warning": "#ffb822",
+                "danger": "#fd3995"
+            },
+            "base": {
+                "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+                "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+            }
+        }
+    };
+    $(document).ready(function () {
+        var menuActivo = $("#kt_aside #kt_aside_menu ul.kt-menu__nav li.menu-activo")[0];
+        var aside = KTLayout.getAsideMenu();
+        aside.setActiveItem(menuActivo);
+        // Ocultar .flash-notice despues de 5 segundos
+        setTimeout(function() {
+            $('.alert-custom').fadeOut('fast');
+        }, 5000);
+    });
+</script>
+</body>
+</html>

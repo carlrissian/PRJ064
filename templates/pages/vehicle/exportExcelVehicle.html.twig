@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Export to Excel" | trans) }}{% endblock %}
+
+{% block body %}
+    <vehicle-export-excel-page/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translations = {
+            title: '{{ 'loadExcel' | trans }}',
+            header: '{{ 'Export database information  vehicles to Excel' | trans }}',
+            label: '{{ 'Select Excel file' | trans }}',
+            notes: '{{ 'Notas' | trans }}',
+            exportButton: '{{ 'Export' | trans }}',
+            errorOnStore: '{{ 'Error al cargar excel' | trans }}',
+        }
+    </script>
+{% endblock %}

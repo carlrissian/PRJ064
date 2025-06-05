@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prj064-pre-importsystem
+  namespace: __KubernetesNamespace__
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-read-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-send-timeout: 300s
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: 300s
+    nginx.ingress.kubernetes.io/server-snippet: "keepalive_timeout 300s; client_body_timeout 300s;"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - pre-importsystem.recordgo.cloud
+      secretName: tls-secret-csi
+  rules:
+    - host: pre-importsystem.recordgo.cloud
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: prj064-pre-importsystem
+                port:
+                  number: 8064

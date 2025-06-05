@@ -1,0 +1,27 @@
+api:
+  resource: 'routes/apps/api/v1.yaml'
+  prefix: /api/v1
+  trailing_slash_on_root: false
+  name_prefix: 'api.'
+view:
+  resource: 'routes/apps/view/v1.yaml'
+  #    prefix: /view/v1
+  trailing_slash_on_root: false
+  name_prefix: 'view.'
+
+#test:
+#  resource: './routes/test/test.yaml'
+#  prefix: 'test'
+
+index:
+  path: /
+  controller: App\Controller\IndexController::index
+  methods: [GET]
+
+app_login:
+  path: '/login'
+  controller: App\Controller\Security\SecurityController::login
+
+logout:
+  path: /logout
+  controller: App\Controller\Security\SecurityController::logout

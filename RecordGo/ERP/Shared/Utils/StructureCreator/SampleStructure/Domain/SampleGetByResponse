@@ -1,0 +1,25 @@
+<?php
+
+namespace SampleNamespace;
+
+use Shared\Domain\GetByResponse;
+
+/**
+ * Class SampleGetByResponse
+ * @method SampleGetByResponse getCollection()
+ */
+class SampleGetByResponse extends GetByResponse
+{
+
+
+    /**
+     * SampleGetByResponse constructor.
+     * @param SampleCollection $collection
+     * @param int $totalRows
+     */
+    public function __construct(SampleCollection $collection, int $totalRows)
+    {
+        $this->collection = $collection;
+        $this->totalRows = $totalRows;
+    }
+}

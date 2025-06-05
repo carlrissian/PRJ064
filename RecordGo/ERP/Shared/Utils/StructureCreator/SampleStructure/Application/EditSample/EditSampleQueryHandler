@@ -1,0 +1,25 @@
+<?php
+
+namespace SampleNamespace;
+
+class EditSampleQueryHandler
+{
+
+    /**
+     * @var SampleRepository
+     */
+    private $sampleRepository;
+
+    public function __construct(SampleRepository $sampleRepository){
+
+        $this->sampleRepository = $sampleRepository;
+    }
+    
+    public function handle(EditSampleQuery $query): EditSampleResponse{
+
+        $sampleIdentifier = $query->getSampleIdentifier();
+        $sample = $this->sampleRepository->getBySampleIdentifier($sampleIdentifier);
+        
+        return new EditSampleResponse();
+    }
+}

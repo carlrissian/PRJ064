@@ -1,0 +1,75 @@
+[
+    {
+        "name": "AREAS",
+        "type": "title"
+    },
+    {
+        "name": "COMPLEMENTOS",
+        "type": "title"
+    },
+    {
+        "name": "Crear",
+        "icon": "la la-angle-double-right",
+        "type": "submenu",
+        "submenu": [
+            {
+                "name": "Item",
+                "route": ["complement.create2", ["{type:\"item\"}"], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Servicio",
+                "route": ["complement.create",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Cobertura",
+                "route": ["complement.create",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Kilometraje",
+                "route": ["complement.create",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Fee",
+                "route": ["complement.create",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            },
+            {
+                "name": "Paquete",
+                "route": ["complement.create",[], true],
+                "icon": "la la-angle-double-right",
+                "type": "element"
+            }
+        ]
+    },
+    {
+        "name": "Visualizar/modificar/clonar",
+        "route": ["complement.list", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    },
+    {
+        "name": "ARTÍCULO DE COMPLEMENTO",
+        "type": "title"
+    },
+    {
+        "name": "Crear",
+        "route": ["complement.article.create", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    },
+    {
+        "name": "Visualizar/modificar/clonar",
+        "route": ["complement.article.list", [], true],
+        "icon": "la la-angle-double-right",
+        "type": "element"
+    }
+]

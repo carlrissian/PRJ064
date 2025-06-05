@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prj064-dev-importsystem
+  namespace: __KubernetesNamespace__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prj064-dev-importsystem
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: prj064-dev-importsystem
+    spec:
+      tolerations:
+        - key: "system-reserved"
+          operator: "Exists"
+          effect: "NoSchedule"
+        - key: "kube-system-only"
+          operator: "Exists"
+          effect: "NoSchedule"
+      containers:
+        - name: prj064-dev-importsystem-nginx
+          image: nginx:alpine
+          imagePullPolicy: Always
+          workingDir: /var/www
+          ports:
+            - containerPort: 80
+            - containerPort: 443
+          volumeMounts:
+            - name: prj064-dev-importsystem
+              mountPath: /var/www
+            - name: prj064-dev-importsystem-nginx-conf
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+        - name: prj064-dev-importsystem
+          image: recordgo.azurecr.io/prj064-dev-importsystem-app:__Build.BuildId__
+          imagePullPolicy: Always
+          env:
+            - name: PHP_IDE_CONFIG
+              value: serverName=erpXdebug
+            - name: XDEBUG_CONFIG
+              value: remote_host=host.docker.internal
+          workingDir: /var/www
+          ports:
+            - containerPort: 9000
+          volumeMounts:
+            - name: prj064-dev-importsystem-app-local-ini
+              mountPath: /usr/local/etc/php/conf.d/local.ini
+              subPath: local.ini
+      initContainers:
+        - name: setup-www
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "cp -r ./RecordGo /var/app/ && cp -r ./bin /var/app/ && cp -r ./public /var/app/ && cp -r ./templates /var/app/ && cp -r ./assets /var/app/ && cp -r ./config /var/app/ && cp -r ./src /var/app/ && cp -r ./var /var/app/"
+          image: recordgo.azurecr.io/prj064-dev-importsystem-app:__Build.BuildId__
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: prj064-dev-importsystem
+              mountPath: /var/app/
+      restartPolicy: Always
+      volumes:
+        - name: prj064-dev-importsystem
+          persistentVolumeClaim:
+            claimName: prj064-dev-importsystem-shared-claim
+        - name: prj064-dev-importsystem-nginx-conf
+          configMap:
+            name: prj064-dev-importsystem-nginx-conf
+        - name: prj064-dev-importsystem-app-local-ini
+          configMap:
+            name: prj064-dev-importsystem-app-local-ini

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Import Excel" | trans) }}{% endblock %}
+
+{% block body %}
+    <vehicle-import-excel-page :vehicle-list="{{ vehicleList }}" :vehicle-status-list="{{ vehicleStatusList }}"/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translations = {
+            title: '{{ 'importExcel' | trans }}',
+            header: '{{ 'Import Excel vehicles to database' | trans }}',
+            label: '{{ 'Select Excel file' | trans }}',
+            notes: '{{ 'Notas' | trans }}',
+            importButton: '{{ 'Import' | trans }}',
+            errorOnStore: '{{ 'Error to load excel ' | trans }}',
+        }
+    </script>
+{% endblock %}

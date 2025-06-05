@@ -1,0 +1,32 @@
+sample.create:
+    path: /create
+    controller: App\Controller\SampleController::create
+    methods: [GET]
+
+sample.store:
+    path: /store
+    controller: App\Controller\SampleController::store
+    methods: [POST]
+    options:
+        expose: true
+
+sample.edit:
+    path: /edit/{sampleIdentifier}
+    controller: App\Controller\SampleController::edit
+    methods: [GET]
+    options:
+        expose: true
+
+sample.update:
+    path: /update/{sampleIdentifier}
+    controller: App\Controller\SampleController::update
+    methods:  [POST]
+    options:
+        expose: true
+
+sample.show:
+    path: /show/{sampleIdentifier}
+    controller: App\Controller\SampleController::show
+    methods: [GET]
+    options:
+        expose: true

@@ -1,0 +1,52 @@
+{% for menu in elements %}
+     {% if menu['type'] == 'title' %}
+        <li class="kt-menu__section">
+            <h4 class="kt-menu__section-text">{{  menu['name'] }}</h4>
+            <i class="kt-menu__section-icon flaticon-more-v2"></i>
+        </li>
+    {% elseif menu['type'] == 'submenu' %}
+        <li class="kt-menu__item kt-menu__item--submenu" aria-haspopup="true" data-ktmenu-submenu-toggle="hover">
+            <a href="javascript:;" class="kt-menu__link kt-menu__toggle">
+                <span class="kt-menu__link-icon"> <i class="{{  menu['icon'] }}"></i></span>
+                <span class="kt-menu__link-text">{{  menu['name'] }}</span>
+                <i class="kt-menu__ver-arrow la la-angle-right"></i>
+            </a>
+            <div class="kt-menu__submenu" >
+                <span class="kt-menu__arrow"></span>
+                <ul class="kt-menu__subnav">
+                    <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true">
+                        <span class="kt-menu__link">
+                            <span class="kt-menu__link-text">{{ menu['name'] }}</span>
+                        </span>
+                    </li>
+                    {% if menu['submenu'] is defined %}
+                        {% include 'partials/header/menu/menu_lateral_elemento.html.twig' with {'elements': menu['submenu']} %}
+                    {% endif %}
+                </ul>
+            </div>
+        </li>
+    {% elseif menu['type'] == 'element' %}
+        {% if menu['route'][1].type is defined %}
+            <li class="kt-menu__item {% if app.request.attributes.get('type') == menu['route'][1].type %}menu-activo{% endif %}" aria-haspopup="true">
+        {% elseif menu['route'][1].complementRateTypeName is defined %}
+                <li class="kt-menu__item {% if app.request.attributes.get('complementRateTypeName') == menu['route'][1].complementRateTypeName %}menu-activo{% endif %}" aria-haspopup="true">
+        {% else %}
+            <li class="kt-menu__item
+                {% if (app.request.attributes.get('_route') == menu['route'][0]) %}
+                    menu-activo
+                    {% else %}
+                        {% for route in menu['route'][3] %}
+                            {% if (app.request.attributes.get('_route') == route) %}
+                            menu-activo
+                            {% endif %}
+                        {% endfor %}
+                {% endif %}
+            " aria-haspopup="true">
+        {% endif %}
+            <a href="{{ path(menu['route'][0], menu['route'][1], menu['route'][2]) }}" class="kt-menu__link ">
+                <span class="kt-menu__link-icon"><i class="{{  menu['icon'] }}"></i></span>
+                <span class="kt-menu__link-text">{{  menu['name'] }}</span>
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}

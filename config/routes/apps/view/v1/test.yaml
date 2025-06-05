@@ -1,0 +1,25 @@
+create:
+  path: /create/
+  controller: App\Apps\View\Test\CreateTestController
+  methods: [GET]
+
+edit:
+  path: /edit/{id}
+  controller: App\Apps\View\Test\EditTestController
+  methods: [GET]
+  options:
+    expose: true
+
+show:
+  path: /show/{id}
+  controller: App\Apps\View\Test\ShowTestController
+  methods: [GET]
+  options:
+    expose: true
+
+list:
+  path: /list
+  controller: App\Apps\View\Test\ListTestController
+  methods: [GET]
+  options:
+    expose: true

@@ -1,0 +1,9 @@
+{% if user is defined and user.environment is defined %}
+	<div class="kt-header__topbar-item kt-header__topbar-item--user">
+		<div class="kt-header__topbar-wrapper" data-offset="0px,0px">
+			<div class="kt-header__topbar-user">
+				<span class="badge {{ user.environment.class ?? '' }}">{{ user.environment.name ?? '' }}</span>
+			</div>
+		</div>
+	</div>
+{% endif %}

@@ -1,0 +1,6 @@
+[submodule "RecordGo/ERP/Shared"]
+	path = RecordGo/ERP/Shared
+	url = https://recordrentacar@dev.azure.com/recordrentacar/Aplicaciones/_git/Shared
+[submodule "assets/SharedAssets"]
+	path = assets/SharedAssets
+	url = https://recordrentacar@dev.azure.com/recordrentacar/Aplicaciones/_git/SharedAssets

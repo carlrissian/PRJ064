@@ -1,0 +1,43 @@
+- name: 'Import System'
+  type: 'title'
+  event: ''
+#- name: 'Import/Export Vehicle'
+#  type: 'submenu'
+#  icon: 'la la-angle-double-right'
+#  data: ''
+#  submenu:
+#      -   name: 'Import Excel to Database'
+#          route: [ 'view.vehicle.import',[ ], true, [ ] ]
+#          icon: 'la la-angle-double-right'
+#          type: 'element'
+#      -   name: 'Export Database Information to Excel'
+#          route: [ 'view.vehicle.export',[ ], true, [ ] ]
+#          icon: 'la la-angle-double-right'
+#          type: 'element'
+- name: 'Import/Export Fleet'
+  type: 'submenu'
+  icon: 'la la-angle-double-right'
+  data: ''
+  submenu:
+      -   name: 'Import'
+          route: [ 'view.fleet.import',[ ], true, [ ] ]
+          icon: 'la la-angle-double-right'
+          type: 'element'
+      -   name: 'Export'
+          route: [ 'view.fleet.export',[ ], true, [ ] ]
+          icon: 'la la-angle-double-right'
+          type: 'element'
+
+- name: 'Import/Export Vehicle'
+  type: 'submenu'
+  icon: 'la la-angle-double-right'
+  data: ''
+  submenu:
+      -   name: 'Import Excel to Database'
+          route: [ 'view.vehicle.import',[ ], true, [ ] ]
+          icon: 'la la-angle-double-right'
+          type: 'element'
+      -   name: 'Export Database Information to Excel'
+          route: [ 'view.vehicle.export',[ ], true, [ ] ]
+          icon: 'la la-angle-double-right'
+          type: 'element'

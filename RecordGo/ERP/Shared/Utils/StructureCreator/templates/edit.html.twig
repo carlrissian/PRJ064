@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Editar sample" | trans) }}{% endblock %}
+
+{% block body %}
+    <edit-sample-page :sampleIdentifier="{{ sampleIdentifier }}" :sample="{{ sample }}"/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+    </script>
+{% endblock %}

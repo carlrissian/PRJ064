@@ -1,0 +1,9 @@
+fleet:
+  resource: "v1/fleet.yaml"
+  prefix: "/fleet"
+  name_prefix: "fleet."
+
+vehicle:
+  resource: "v1/vehicle.yaml"
+  prefix: "/vehicle"
+  name_prefix: "vehicle."

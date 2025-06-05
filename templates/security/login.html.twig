@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/img/favicon.svg?1" type="image/vnd.microsoft.icon" sizes="32x32">
+    <title>Login</title>
+    {{ encore_entry_link_tags('app') }}
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+    <script>
+        WebFont.load({
+            google: {
+                "families": ["Poppins:300,400,500,600,700"]
+            },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+</head>
+
+<body class="kt-page--loading-enabled kt-page--loading kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header--minimize-menu kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--left kt-aside--fixed kt-page--loading">
+<div class="kt-grid kt-grid--ver kt-grid--root kt-page" id="app">
+    <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v3 kt-login--signin" id="kt_login">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="
+        {% if app.request.server.get('APP_ENV') == 'production' %}
+                background-image: url(../img/fondo_login.jpg);
+        {% elseif app.request.server.get('APP_ENV') == 'pre' %}
+                background-image: url(../img/fondo_login-pre.jpg);
+        {% elseif app.request.server.get('APP_ENV') == 'dev' %}
+                background-image: url(../img/fondo_login-dev.jpg);
+        {% else %}
+                background-image: url(../img/fondo_login-local.jpg);
+        {% endif %}">
+            <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                <div class="kt-login__container">
+                    <div class="kt-login__logo">
+                        <a href="/">
+                            {% if app.request.server.get('APP_ENV') == 'production' %}
+                                <img width="100%" src="{{ asset('img/logoMosy.png') }}" alt="Logo">
+                            {% elseif app.request.server.get('APP_ENV') == 'pre' %}
+                                <img width="100%" src="{{ asset('img/logoMosy-pre.png') }}" alt="Logo">
+                            {% elseif app.request.server.get('APP_ENV') == 'dev' %}
+                                <img width="100%" src="{{ asset('img/logoMosy-dev.png') }}" alt="Logo">
+                            {% else %}
+                                <img width="100%" src="{{ asset('img/logoMosy-local.png') }}" alt="Logo">
+                            {% endif %}
+                        </a>
+                    </div>
+
+                    <div class="kt-login__signin">
+                        <div class="kt-login__head">
+                            <h3 class="kt-login__title">{{'Log in to your account' | trans }}</h3>
+                        </div>
+
+                        {% if error %}
+                            <div style="color: red;text-align: center">{{ (error.messageKey is defined)?error.messageKey:error.messageData| trans }}</div>
+                        {% endif %}
+
+                        <form class="kt-form" id="login-form" method="POST" action="{{ path('app_login') }}">
+                            <div class="input-group">
+                                <input id="username" type="text" class="form-control" name="_username" value="{{ last_username|split('@')[0]}}" placeholder="Nombre de usuario" required autocomplete="off" autofocus>
+                            </div>
+
+                            <div class="input-group">
+                                <input id="password" type="password" class="form-control" name="_password" required placeholder="Contraseña" autocomplete="off">
+                            </div>
+
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <select class="form-control" id="countryId" name="_countryId" required>
+                                        <option value="" disabled selected>{{'Select an option' | trans }}</option>
+                                        {% for country in countryList %}
+                                            <option value="{{ country.iso }}">{{ country.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <input type="hidden" name="go_to" value="{{ path('app_login') }}"/>
+                            <div class="kt-login__actions">
+                                <button type="submit" id="kt_login_signin_submit" class="btn btn-brand btn-elevate kt-login__btn-primary">
+                                    {{'Login' | trans }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,5 @@
+selectList:
+  path: /selectlist
+  controller: App\Apps\Api\Acriss\SelectListAcrissController
+  options:
+    expose: true

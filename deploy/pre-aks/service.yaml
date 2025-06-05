@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prj064-pre-importsystem
+  namespace: __KubernetesNamespace__
+spec:
+  selector:
+    app: prj064-pre-importsystem
+  ports:
+    - name: prj064-pre-importsystem-http
+      protocol: TCP
+      port: 8064
+      targetPort: 80
+    - name: prj064-pre-importsystem-https
+      protocol: TCP
+      port: 443
+      targetPort: 443

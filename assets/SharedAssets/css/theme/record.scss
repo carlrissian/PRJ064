@@ -1,0 +1,254 @@
+//Left Menu
+/*
+$redSecondRecord: #ea5154;  modificado abajo, lo dejo comentado por si se quiere volver al color anterior
+$titlesColor: #333333;      modificado abajo, lo dejo comentado por si se quiere volver al color anterior
+*/
+
+$redRecord: #cf2d30;
+$redSecondRecord: #a72b2a;
+$secondColor: #ffffff;
+$titlesColor: #2f2b2c;
+$graySelected: #f2f3f8;
+
+
+.kt-aside, .kt-aside__brand, .kt-aside-menu, .kt-header-mobile {
+  background-color: $redRecord;
+
+  .kt-header-mobile__logo img{
+    height: 60%;
+  }
+}
+
+.kt-aside__brand-tools{
+  button:focus, button:focus {
+    background-color: $redRecord !important;
+    border: 0;
+  }
+}
+
+.kt-aside__brand-logo{
+  img{
+    width: 80%;
+  }
+}
+
+.kt-menu__nav {
+  background-color: $secondColor;
+}
+.kt-menu__section {
+  margin-top: 0 !important;
+  .kt-menu__section-text{
+    color: $redRecord !important;
+    font-weight: bold !important;
+  }
+}
+.kt-menu__item {
+  .kt-menu__link:hover{
+    background-color: $graySelected !important;
+    .kt-menu__link-text, .kt-menu__link-icon{
+      color: #000000 !important;
+    }
+  }
+  .kt-menu__ver-arrow{
+    color: $redRecord !important;
+  }
+}
+
+.kt-menu__submenu{
+  .kt-menu__subnav{
+    .kt-menu__item--submenu{
+      .kt-menu__toggle{
+        background-color: $secondColor !important;
+      }
+    }
+  }
+}
+
+//Menu Abierto
+.kt-menu__item--open{
+  .kt-menu__toggle{
+    background-color: $graySelected !important;
+    .kt-menu__link-text, .kt-menu__link-icon{
+      color: #000000 !important;
+    }
+  }
+}
+//Seleccionado
+.kt-menu__item--active{
+  .kt-menu__link{
+    background-color: $graySelected !important;
+    .kt-menu__link-icon, .kt-menu__link-text {
+      color: $redRecord !important;
+      font-weight: bold;
+    }
+  }
+}
+
+//CONTENIDO
+
+.kt-container{
+  h1 {
+    color: $titlesColor;
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+}
+//Filter
+.kt-portlet--solid-light{
+  .kt-portlet__foot{
+    background-color: $secondColor !important;
+    button {
+      border: 1px solid $redRecord;
+      color: $redRecord;
+    }
+
+    button:hover, button:active, button:visited, button:focus  {
+      border: 1px solid $redRecord;
+      color: $secondColor;
+      background-color: $redRecord;
+    }
+
+    input {
+      .date {
+        background-color: $secondColor;
+      }
+    }
+  }
+}
+
+// selectores
+.dropdown-menu, .dropdown {
+  .selected {
+    background-color: $graySelected !important;
+  }
+
+  .active {
+    background-color: $redRecord;
+    color: $secondColor;
+  }
+}
+
+.btn-record{
+  border: 1px solid $redRecord;
+  background-color: $secondColor;
+  color: $redRecord;
+}
+
+.btn-record:hover, .btn-record:active, .btn-record:visited, .btn-record:focus  {
+  border: 1px solid $redRecord;
+  color: $secondColor;
+  background-color: $redRecord !important;
+}
+
+.btn-dark{
+  border: 1px solid $redRecord;
+  background-color: $redRecord !important;
+  color: $secondColor;
+}
+
+.btn-dark:hover, .btn-dark:active, .btn-dark:visited, .btn-dark:focus  {
+  border: 1px solid $redRecord;
+  color: $secondColor;
+  background-color: $redRecord !important;
+}
+
+.btn-primary{
+  border: 1px solid $redRecord;
+  border-radius: 50px;
+  background-color: $secondColor !important;
+  color: $redRecord !important;
+}
+
+.badge-primary{
+  background-color: $redRecord !important;
+  color: $secondColor;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:visited, .btn-primary:focus  {
+  border: 1px solid $redRecord;
+  color: $secondColor !important;
+  background-color: $redRecord !important;
+}
+
+.btn-default  {
+  border: 1px solid $redRecord !important;
+  color: $redRecord!important;
+}
+
+.btn-default:hover, .btn-default:active, .btn-default:focus  {
+  border: 1px solid $redRecord !important;
+  color: $secondColor !important;
+  background-color: $redRecord !important;
+}
+
+.btn-brand {
+  border: 1px solid $redRecord !important;
+  color: $secondColor !important;
+  background-color: $redSecondRecord !important;
+}
+
+.btn-brand:hover, .btn-brand:active, .btn-brand:visited, .btn-brand:focus  {
+  border: 1px solid $redRecord;
+  color: $secondColor;
+  background-color: $redRecord !important;
+}
+
+
+.filters{
+  .btn-pill{
+    background-color: $redRecord;
+    color: $secondColor;
+  }
+
+  .btn-pill:hover, .btn-pill:active, .btn-pill:visited, .btn-pill:focus  {
+    border: 1px solid $redRecord;
+    color: $redRecord !important;
+    background-color: $secondColor !important;
+  }
+
+  // Cambios realizados para la feature/P26A-1838
+  .date {
+    background-color: $secondColor;
+  }
+}
+
+.table {
+  thead th{
+    background-color: $redRecord;
+    color: $secondColor;
+  }
+}
+
+.kt-scrolltop{
+  background: $redRecord;
+}
+
+.pagination .page-link{
+  color: $redRecord;
+}
+
+.page-item.active .page-link {
+  border: $redRecord;
+  background-color: $redRecord;
+  color: $secondColor;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: $redRecord;
+}
+
+// Cambios realizados para la feature/P26A-1838
+input[type='checkbox']:focus ~ span, input[type=checkbox] {
+  /*background-color: #800000 !important;*/
+  border: 2px solid #800000 !important;
+}
+
+.border-red {
+
+  border: 2px solid $redRecord !important; /* Red border */
+
+  padding: 5px !important; /* Add padding for better appearance */
+
+  outline: none !important; /* Remove default outline */
+
+}

@@ -1,0 +1,32 @@
+{
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "unused": true,
+  "boss": true,
+  "eqnull": true,
+  "node": true,
+  "browser": true,
+  "bitwise": true,
+  "camelcase": true,
+  "indent": 2,
+  "esversion": 11,
+  "quotmark": "single",
+  "globals": {
+    "document": true,
+    "window": true,
+    "jQuery": true,
+    "$": true,
+    "wrap": true,
+    "unwrap": true,
+    "Polymer": true,
+    "Platform": true,
+    "page": true,
+    "app": true
+  }
+}

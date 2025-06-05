@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Editar canal" | trans) }}{% endblock %}
+
+{% block body %}
+    <edit-test-page :id="{{ id }}" :test="{{ test }}"/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translationsTest = {
+            title: '{{ 'Editar canal' | trans }}',
+            code: '{{ 'Código' | trans }}',
+            name: '{{ 'Nombre' | trans }}',
+            notes: '{{ 'Notas' | trans }}',
+            buttonCancel: '{{ 'Cancelar' | trans }}',
+            buttonSave: '{{ 'Guardar' | trans }}',
+            creationDate: '{{ 'Fecha de creación' | trans }}',
+            creationUserName: '{{ 'Creado por' | trans }}',
+            editionUserName: '{{ 'Modificado por' | trans }}',
+            editionDate: '{{ 'Fecha de modificación' | trans }}',
+            errorOnStore: '{{ 'Error al actualizar Test 🤦‍♀️' | trans }}',
+        }
+    </script>
+{% endblock %}

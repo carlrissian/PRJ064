@@ -1,0 +1,79 @@
+acriss:
+  resource: "v1/acriss.yaml"
+  prefix: "/acriss"
+  name_prefix: "acriss."
+
+brand:
+  resource: "v1/brand.yaml"
+  prefix: "/brand"
+  name_prefix: "brand."
+
+carGroup:
+  resource: "v1/carGroup.yaml"
+  prefix: "/carGroup"
+  name_prefix: "carGroup."
+
+fleet:
+  resource: "v1/fleet.yaml"
+  prefix: "/fleet"
+  name_prefix: "fleet."
+
+gearBox:
+  resource: "v1/gearBox.yaml"
+  prefix: "/gearbox"
+  name_prefix: "gearBox."
+
+location:
+  resource: "v1/location.yaml"
+  prefix: "/location"
+  name_prefix: "location."
+
+model:
+  resource: "v1/model.yaml"
+  prefix: "/model"
+  name_prefix: "model."
+
+motorizationType:
+  resource: "v1/motorizationType.yaml"
+  prefix: "/motorization-type"
+  name_prefix: "motorizationType."
+
+provider:
+  resource: "v1/provider.yaml"
+  prefix: "/provider"
+  name_prefix: "provider."
+
+purchaseType:
+  resource: "v1/purchaseType.yaml"
+  prefix: "/purchaseType"
+  name_prefix: "purchaseType."
+
+saleMethod:
+  resource: "v1/saleMethod.yaml"
+  prefix: "/sale-method"
+  name_prefix: "saleMethod."
+
+trim:
+  resource: "v1/trim.yaml"
+  prefix: "/trim"
+  name_prefix: "trim."
+
+vehicle:
+  resource: "v1/vehicle.yaml"
+  prefix: "/vehicle"
+  name_prefix: "vehicle."
+
+vehicleStatus:
+  resource: "v1/vehicleStatus.yaml"
+  prefix: "/vehicle/status"
+  name_prefix: "vehicleStatus."
+
+vehicleType:
+  resource: "v1/vehicleType.yaml"
+  prefix: "/vehicle/type"
+  name_prefix: "vehicleType."
+
+test:
+  resource: "v1/test.yaml"
+  prefix: "/test"
+  name_prefix: "test."

@@ -1,0 +1,13 @@
+import:
+  path: /import
+  controller: App\Apps\View\Vehicle\ImportExcelVehicleController
+  methods: [GET]
+  options:
+    expose: true
+
+export:
+  path: /export
+  controller: App\Apps\View\Vehicle\ExportExcelVehicleController
+  methods: [ GET ]
+  options:
+    expose: true

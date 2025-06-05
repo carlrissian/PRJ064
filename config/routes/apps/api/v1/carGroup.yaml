@@ -1,0 +1,5 @@
+selectList:
+  path: /selectlist
+  controller: App\Apps\Api\CarGroup\SelectListCarGroupController
+  options:
+    expose: true

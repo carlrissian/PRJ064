@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Show canal" | trans) }}{% endblock %}
+
+{% block body %}
+    <show-test-page :id="{{ id }}" :test="{{ test }}"/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translationsTestShow = {
+            title: '{{ 'Mostrar canal' | trans }}',
+            code: '{{ 'Código' | trans }}',
+            name: '{{ 'Nombre' | trans }}',
+            notes: '{{ 'Notas' | trans }}',
+            creationDate: '{{ 'Fecha de creación' | trans }}',
+            creationUserName: '{{ 'Creado por' | trans }}',
+            editionUserName: '{{ 'Modificado por' | trans }}',
+            editionDate: '{{ 'Fecha de modificación' | trans }}',
+            goList: '{{ 'Ir al listado' | trans }}',
+        }
+    </script>
+{% endblock %}

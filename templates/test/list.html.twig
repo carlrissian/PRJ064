@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Listado de canales" | trans) }}{% endblock %}
+
+{% block body %}
+    <list-test-page/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translationsTestList = {
+            title: '{{ 'Listado de canales' | trans }}',
+            code: '{{ 'Código' | trans }}',
+            name: '{{ 'Nombre' | trans }}',
+            notes: '{{ 'Notas' | trans }}',
+            creationDate: '{{ 'Fecha de creación' | trans }}',
+            creationUserName: '{{ 'Creado por' | trans }}',
+            editionUserName: '{{ 'Modificado por' | trans }}',
+            editionDate: '{{ 'Fecha de modificación' | trans }}',
+            show: '{{ 'Mostrar' | trans }}',
+            edit: '{{ 'Editar' | trans }}',
+            options: '{{ 'Opciones' | trans }}',
+        }
+    </script>
+{% endblock %}

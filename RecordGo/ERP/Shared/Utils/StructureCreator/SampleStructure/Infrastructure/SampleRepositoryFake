@@ -1,0 +1,32 @@
+<?php
+
+namespace SampleNamespace;
+
+use ProjectName\Sample\Domain\Sample;
+use ProjectName\Sample\Domain\SampleCriteria;
+use ProjectName\Sample\Domain\SampleGetByResponse;
+use ProjectName\Sample\Domain\SampleRepository;
+
+class SampleRepositoryFake implements SampleRepository
+{
+
+    public function getBy(SampleCriteria $criteria): SampleGetByResponse
+    {
+        // TODO: Implement getBy() method.
+    }
+
+    public function getBySampleIdentifier(int $sampleIdentifier): Sample
+    {
+        // TODO: Implement getSampleIdentifier() method.
+    }
+
+    public function store(Sample $sample): Sample
+    {
+        // TODO: Implement store() method.
+    }
+
+    public function update(Sample $sample): Sample
+    {
+        // TODO: Implement update() method.
+    }
+}

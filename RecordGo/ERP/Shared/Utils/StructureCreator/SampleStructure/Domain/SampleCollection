@@ -1,0 +1,21 @@
+<?php
+
+namespace SampleNamespace;
+
+use Shared\Domain\Collection;
+
+/**
+ * Class SampleCollection
+ * @method Sample[] getIterator()
+ */
+class SampleCollection extends Collection
+{
+
+    /**
+     * @return string
+     */
+    protected function type(): string
+    {
+        return Sample::class;
+    }
+}

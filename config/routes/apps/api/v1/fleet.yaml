@@ -1,0 +1,13 @@
+import:
+  path: /import
+  controller: App\Apps\Api\Fleet\ImportExcelFleetController
+  methods: [POST]
+  options:
+    expose: true
+
+export:
+  path: /export
+  controller: App\Apps\Api\Fleet\ExportExcelFleetController
+  methods: [POST]
+  options:
+    expose: true

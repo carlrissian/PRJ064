@@ -1,0 +1,25 @@
+<?php
+
+namespace SampleNamespace;
+
+class ShowSampleQueryHandler
+{
+
+    /**
+     * @var SampleRepository
+     */
+    private $sampleRepository;
+
+    public function __construct(SampleRepository $sampleRepository){
+
+        $this->sampleRepository = $sampleRepository;
+    }
+
+    public function handle(ShowSampleQuery $query): ShowSampleResponse{
+
+        $sampleIdentifier = $query->getSampleIdentifier();
+        $sample = $this->sampleRepository->getBySampleIdentifier($sampleIdentifier);
+
+        return new ShowSampleResponse();
+    }
+}

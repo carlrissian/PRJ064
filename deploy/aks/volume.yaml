@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: prj064-importsystem-shared-claim
+  namespace: __KubernetesNamespace__
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: production-sat
+  resources:
+    requests:
+      storage: 2Gi

@@ -1,0 +1,63 @@
+<?php
+
+
+namespace App\Controller;
+
+
+use ProjectName\Sample\Application\CreateSample\CreateSampleQuery;
+use ProjectName\Sample\Application\CreateSample\CreateSampleQueryHandler;
+use ProjectName\Sample\Application\EditSample\EditSampleQuery;
+use ProjectName\Sample\Application\EditSample\EditSampleQueryHandler;
+use ProjectName\Sample\Application\ShowSample\ShowSampleQuery;
+use ProjectName\Sample\Application\ShowSample\ShowSampleQueryHandler;
+use ProjectName\Sample\Application\StoreSample\StoreSampleCommand;
+use ProjectName\Sample\Application\StoreSample\StoreSampleCommandHandler;
+use ProjectName\Sample\Application\UpdateSample\UpdateSampleCommand;
+use ProjectName\Sample\Application\UpdateSample\UpdateSampleCommandHandler;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+class SampleController extends Controller
+{
+
+
+    public function create(CreateSampleQueryHandler $handler): Response{
+
+        $response = $handler->handle(new CreateSampleQuery());
+        return $this->render('sample/create.html.twig');
+    }
+
+    public function store(Request $request, StoreSampleCommandHandler $handler): Response{
+
+        $command = new StoreSampleCommand();
+        $response = $handler->handle($command);
+
+        return $this->redirectToRoute('sample.edit', array('sampleIdentifier' => $response->getSampleIdentifier()));
+    }
+
+   
+    public function edit(int $sampleIdentifier, EditSampleQueryHandler $handler): Response{
+
+        $response = $handler->handle(new EditSampleQuery($sampleIdentifier));
+
+        $sample = $this->json($response->getSample())->getContent();
+        return $this->render('sample/edit.html.twig', ['sampleIdentifier' => $sampleIdentifier, 'sample' => $sample]);
+    }
+
+ 
+    public function update($sampleIdentifier, Request $request, UpdateSampleCommandHandler $handler): Response{
+
+        $response = $handler->handle(new UpdateSampleCommand());
+
+        return $this->redirectToRoute('sample.show', array('sampleIdentifier' => $response->getSampleIdentifier()));
+    }
+
+    public function show(int $sampleIdentifier, ShowSampleQueryHandler $handler): Response{
+
+        $response = $handler->handle(new ShowSampleQuery($sampleIdentifier));
+
+        $sample = $this->json($response->getSample())->getContent();
+        return $this->render('sample/show.html.twig', ['sampleIdentifier' => $sampleIdentifier, 'sample' => $sample]);
+    }
+
+}

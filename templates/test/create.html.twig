@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ("Crear canal" | trans) }}{% endblock %}
+
+{% block body %}
+    <create-test-page/>
+{% endblock %}
+{% block javascripts %}
+    <script>
+        let translationsTest = {
+                title: '{{ 'Crear canal' | trans }}',
+                code: '{{ 'Código' | trans }}',
+                name: '{{ 'Nombre' | trans }}',
+                notes: '{{ 'Notas' | trans }}',
+                buttonCancel: '{{ 'Cancelar' | trans }}',
+                buttonSave: '{{ 'Guardar' | trans }}',
+                errorOnStore: '{{ 'Error al crear Test 🤦‍♀️' | trans }}',
+        }
+    </script>
+{% endblock %}
