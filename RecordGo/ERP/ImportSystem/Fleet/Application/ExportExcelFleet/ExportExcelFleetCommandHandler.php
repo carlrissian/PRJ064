@@ -312,15 +312,21 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('motor'),
-                    "value" => null,    // TODO pendiente de rellenar
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getMotor() !== null
+                        ? $fleet->getVehicle()->getMotor()
+                        : ($fleet->getAnexoLine() !== null ? $fleet->getAnexoLine()->getMotor() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('motorDenomination'),
-                    "value" => null,    // TODO pendiente de rellenar
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getMotorDenomination() !== null
+                        ? $fleet->getVehicle()->getMotorDenomination()
+                        : ($fleet->getAnexoLine() !== null ? $fleet->getAnexoLine()->getMotorDenomination() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('kw'),
-                    "value" => null,    // TODO pendiente de rellenar
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getKw() !== null
+                        ? $fleet->getVehicle()->getKw()
+                        : ($fleet->getAnexoLine() !== null ? $fleet->getAnexoLine()->getKw() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('gearBox'),
@@ -334,7 +340,9 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('colorMIR'),
-                    "value" => null,    // TODO pendiente de rellenar
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getColorMIR() !== null
+                        ? $fleet->getVehicle()->getColorMIR()->getName()
+                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getColorMIR() !== null ? $fleet->getAnexoLine()->getColorMIR()->getName() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('co2'),
@@ -516,7 +524,11 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('cancelationDate'),
-                    "value" => null,    // TODO pendiente de rellenar
+                    "value" => $fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getCertificate() !== null ?
+                        ($fleet->getAnexoLine()->getCertificate()->getInsurancePolicy() !== null && $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getDeactivationDate() !== null ?
+                            $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getDeactivationDate()->__toString('d/m/Y')
+                            : ($fleet->getAnexoLine()->getCertificate()->getDeactivationDate() !== null ? $fleet->getAnexoLine()->getCertificate()->getDeactivationDate()->__toString('d/m/Y') : null))
+                        : null
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('finishDate'),
