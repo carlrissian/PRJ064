@@ -36,3 +36,4 @@ services:
     ImportSystem\VehicleStatus\Domain\VehicleStatusRepository: '@ImportSystem\VehicleStatus\Infrastructure\VehicleStatusRepositorySap'
     ImportSystem\Fleet\Domain\FleetRepository: '@ImportSystem\Fleet\Infrastructure\FleetRepositorySap'
     ImportSystem\Acriss\Domain\AcrissRepository: '@ImportSystem\Acriss\Infrastructure\AcrissRepositorySap'
+    ImportSystem\ColorMIR\Domain\ColorMIRRepository: '@ImportSystem\ColorMIR\Infrastructure\ColorMIRRepositorySap'
