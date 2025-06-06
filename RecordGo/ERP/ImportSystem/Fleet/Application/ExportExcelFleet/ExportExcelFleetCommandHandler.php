@@ -3,54 +3,16 @@
 namespace ImportSystem\Fleet\Application\ExportExcelFleet;
 
 use Shared\Utils\Utils;
-use ImportSystem\Trim\Domain\Trim;
 use Shared\Domain\Criteria\Filter;
 use Shared\Domain\Pagination\Sort;
 use ImportSystem\Fleet\Domain\Fleet;
-use ImportSystem\Acriss\Domain\Acriss;
-use ImportSystem\GearBox\Domain\GearBox;
 use Shared\Domain\Pagination\Pagination;
-use ImportSystem\CarGroup\Domain\CarGroup;
-use ImportSystem\Location\Domain\Location;
-use ImportSystem\Provider\Domain\Provider;
-use ImportSystem\Trim\Domain\TrimCriteria;
 use Shared\Domain\Criteria\FilterOperator;
 use ImportSystem\Fleet\Domain\FleetCriteria;
-use ImportSystem\Trim\Domain\TrimRepository;
 use Shared\Domain\Criteria\FilterCollection;
 use Shared\Domain\Pagination\SortCollection;
-use ImportSystem\Fleet\Domain\FileRepository;
-use ImportSystem\Acriss\Domain\AcrissCriteria;
 use ImportSystem\Fleet\Domain\FleetRepository;
-use ImportSystem\SaleMethod\Domain\SaleMethod;
-use ImportSystem\Acriss\Domain\AcrissRepository;
 use ImportSystem\Fleet\Domain\FleetExcelColumns;
-use ImportSystem\GearBox\Domain\GearBoxCriteria;
-use ImportSystem\VehicleType\Domain\VehicleType;
-use ImportSystem\CarGroup\Domain\CarGroupCriteria;
-use ImportSystem\ColorMIR\Domain\ColorMIRCriteria;
-use ImportSystem\GearBox\Domain\GearBoxRepository;
-use ImportSystem\Location\Domain\LocationCriteria;
-use ImportSystem\Provider\Domain\ProviderCriteria;
-use ImportSystem\PurchaseType\Domain\PurchaseType;
-use ImportSystem\CarGroup\Domain\CarGroupRepository;
-use ImportSystem\ColorMIR\Domain\ColorMIRRepository;
-use ImportSystem\Location\Domain\LocationRepository;
-use ImportSystem\Provider\Domain\ProviderRepository;
-use ImportSystem\VehicleStatus\Domain\VehicleStatus;
-use ImportSystem\SaleMethod\Domain\SaleMethodCriteria;
-use ImportSystem\SaleMethod\Domain\SaleMethodRepository;
-use ImportSystem\VehicleType\Domain\VehicleTypeCriteria;
-use ImportSystem\PurchaseType\Domain\PurchaseTypeCriteria;
-use ImportSystem\VehicleType\Domain\VehicleTypeRepository;
-use ImportSystem\PurchaseType\Domain\PurchaseTypeRepository;
-use ImportSystem\VehicleStatus\Domain\VehicleStatusCriteria;
-use ImportSystem\VehicleStatus\Domain\VehicleStatusRepository;
-use ImportSystem\MotorizationType\Domain\MotorizationTypeCriteria;
-use ImportSystem\MotorizationType\Domain\MotorizationTypeRepository;
-use ImportSystem\VehicleSeats\Domain\VehicleSeats;
-use ImportSystem\VehicleSeats\Domain\VehicleSeatsCriteria;
-use ImportSystem\VehicleSeats\Domain\VehicleSeatsRepository;
 
 class ExportExcelFleetCommandHandler
 {
@@ -59,126 +21,13 @@ class ExportExcelFleetCommandHandler
      */
     private FleetRepository $fleetRepository;
 
-    /**
-     * @var FileRepository $fileRepository
-     */
-    private FileRepository $fileRepository;
-
-
-    /**
-     * @var ProviderRepository $providerRepository
-     */
-    private $providerRepository;
-
-    /**
-     * @var SaleMethodRepository $saleMethodRepository
-     */
-    private $saleMethodRepository;
-
-    /**
-     * @var PurchaseTypeRepository $purchaseTypeRepository
-     */
-    private $purchaseTypeRepository;
-
-    /**
-     * @var TrimRepository $trimRepository
-     */
-    private $trimRepository;
-
-    /**
-     * @var MotorizationTypeRepository $motorizationTypeRepository
-     */
-    private $motorizationTypeRepository;
-
-    /**
-     * @var GearBoxRepository $gearBoxRepository
-     */
-    private $gearBoxRepository;
-
-    /**
-     * @var ColorMIRRepository $colorMIRRepository
-     */
-    private $colorMIRRepository;
-
-    /**
-     * @var VehicleSeatsRepository $vehicleSeatsRepository
-     */
-    private $vehicleSeatsRepository;
-
-    /**
-     * @var VehicleTypeRepository $vehicleTypeRepository
-     */
-    private $vehicleTypeRepository;
-
-    /**
-     * @var CarGroupRepository $vehicleGroupRepository
-     */
-    private $vehicleGroupRepository;
-
-    /**
-     * @var AcrissRepository $acrissRepository
-     */
-    private $acrissRepository;
-
-    /**
-     * @var LocationRepository $locationRepository
-     */
-    private $locationRepository;
-
-    /**
-     * @var VehicleStatusRepository $vehicleStatusRepository
-     */
-    private $vehicleStatusRepository;
 
     /**
      * @param FleetRepository $fleetRepository
-     * @param FileRepository $fileRepository
-     * @param ProviderRepository $providerRepository
-     * @param SaleMethodRepository $saleMethodRepository
-     * @param PurchaseTypeRepository $purchaseTypeRepository
-     * @param TrimRepository $trimRepository
-     * @param MotorizationTypeRepository $motorizationTypeRepository
-     * @param GearBoxRepository $gearBoxRepository
-     * @param ColorMIRRepository $colorMIRRepository
-     * @param VehicleSeatsRepository $vehicleSeatsRepository
-     * @param VehicleTypeRepository $vehicleTypeRepository
-     * @param CarGroupRepository $vehicleGroupRepository
-     * @param AcrissRepository $acrissRepository
-     * @param LocationRepository $locationRepository
-     * @param VehicleStatusRepository $vehicleStatusRepository
      */
-    public function __construct(
-        FleetRepository $fleetRepository,
-        FileRepository $fileRepository,
-        ProviderRepository $providerRepository,
-        SaleMethodRepository $saleMethodRepository,
-        PurchaseTypeRepository $purchaseTypeRepository,
-        TrimRepository $trimRepository,
-        MotorizationTypeRepository $motorizationTypeRepository,
-        GearBoxRepository $gearBoxRepository,
-        ColorMIRRepository $colorMIRRepository,
-        VehicleSeatsRepository $vehicleSeatsRepository,
-        VehicleTypeRepository $vehicleTypeRepository,
-        CarGroupRepository $vehicleGroupRepository,
-        AcrissRepository $acrissRepository,
-        LocationRepository $locationRepository,
-        VehicleStatusRepository $vehicleStatusRepository
-    ) {
+    public function __construct(FleetRepository $fleetRepository)
+    {
         $this->fleetRepository = $fleetRepository;
-        $this->fileRepository = $fileRepository;
-        $this->providerRepository = $providerRepository;
-        $this->saleMethodRepository = $saleMethodRepository;
-        $this->purchaseTypeRepository = $purchaseTypeRepository;
-        $this->trimRepository = $trimRepository;
-        $this->motorizationTypeRepository = $motorizationTypeRepository;
-        $this->gearBoxRepository = $gearBoxRepository;
-        $this->colorMIRRepository = $colorMIRRepository;
-        $this->vehicleSeatsRepository = $vehicleSeatsRepository;
-        $this->vehicleTypeRepository = $vehicleTypeRepository;
-        $this->vehicleGroupRepository = $vehicleGroupRepository;
-        $this->acrissRepository = $acrissRepository;
-        $this->locationRepository = $locationRepository;
-        $this->vehicleStatusRepository = $vehicleStatusRepository;
     }
 
     /**
@@ -189,8 +38,6 @@ class ExportExcelFleetCommandHandler
     {
         $criteria = $this->setCriteria($command);
         $fleetCollection = $this->fleetRepository->export($criteria);
-
-        $dropdownLists = $this->setDropDownList();
 
         $fleetList = [];
         /**
@@ -224,10 +71,8 @@ class ExportExcelFleetCommandHandler
                 [
                     "title" => FleetExcelColumns::getNameById('providerSAPId'),
                     "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getProvider() !== null
-                        ? sprintf("%s | %s", $fleet->getVehicle()->getProvider()->getProviderSAPId(), $fleet->getVehicle()->getProvider()->getName())
-                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getProvider() !== null
-                            ? sprintf("%s | %s", $fleet->getAnexoLine()->getProvider()->getProviderSAPId(), $fleet->getAnexoLine()->getProvider()->getName())
-                            : null)
+                        ? $fleet->getVehicle()->getProvider()->getProviderSAPId()
+                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getProvider() !== null ? $fleet->getAnexoLine()->getProvider()->getProviderSAPId() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('saleMethod'),
@@ -242,10 +87,8 @@ class ExportExcelFleetCommandHandler
                 [
                     "title" => FleetExcelColumns::getNameById('customerSAPId'),
                     "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getBbCustomer() !== null
-                        ? sprintf("%s | %s", $fleet->getVehicle()->getBbCustomer()->getCustomerSAPId(), $fleet->getVehicle()->getBbCustomer()->getName())
-                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getBbCustomer() !== null
-                            ? sprintf("%s | %s", $fleet->getAnexoLine()->getBbCustomer()->getCustomerSAPId(), $fleet->getAnexoLine()->getBbCustomer()->getName())
-                            : null)
+                        ? $fleet->getVehicle()->getBbCustomer()->getCustomerSAPId()
+                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getBbCustomer() !== null ? $fleet->getAnexoLine()->getBbCustomer()->getCustomerSAPId() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('vehicleSalesName'),
@@ -275,23 +118,9 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('trimId'),
-                    "value" => $fleet->getVehicle() !== null
-                        ? sprintf(
-                            "%s | %s %s %s",
-                            $fleet->getVehicle()->getTrim() ? $fleet->getVehicle()->getTrim()->getId() : null,
-                            $fleet->getVehicle()->getBrand() ? $fleet->getVehicle()->getBrand()->getName() : null,
-                            $fleet->getVehicle()->getModel() ? $fleet->getVehicle()->getModel()->getName() : null,
-                            $fleet->getVehicle()->getTrim() ? $fleet->getVehicle()->getTrim()->getName() : null
-                        )
-                        : ($fleet->getAnexoLine() !== null
-                            ? sprintf(
-                                "%s | %s %s %s",
-                                $fleet->getAnexoLine()->getTrim() ? $fleet->getAnexoLine()->getTrim()->getId() : null,
-                                $fleet->getAnexoLine()->getBrand() ? $fleet->getAnexoLine()->getBrand()->getName() : null,
-                                $fleet->getAnexoLine()->getModel() ? $fleet->getAnexoLine()->getModel()->getName() : null,
-                                $fleet->getAnexoLine()->getTrim() ? $fleet->getAnexoLine()->getTrim()->getName() : null
-                            )
-                            : null)
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getTrim() !== null
+                        ? $fleet->getVehicle()->getTrim()->getId()
+                        : ($fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getTrim() !== null ? $fleet->getAnexoLine()->getTrim()->getId() : null)
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('carCC'),
@@ -424,13 +253,7 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('acriss'),
-                    "value" => $fleet->getVehicle() !== null
-                        ? sprintf(
-                            "%s (%s)",
-                            $fleet->getVehicle()->getAcriss() !== null ? $fleet->getVehicle()->getAcriss()->getName() : null,
-                            $fleet->getVehicle()->getVehicleGroup() !== null ? $fleet->getVehicle()->getVehicleGroup()->getName() : null
-                        )
-                        : null
+                    "value" => $fleet->getVehicle() !== null && $fleet->getVehicle()->getAcriss() !== null ? $fleet->getVehicle()->getAcriss()->getName() : null
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('averageDamageAmount'),
@@ -502,12 +325,7 @@ class ExportExcelFleetCommandHandler
                 [
                     "title" => FleetExcelColumns::getNameById('insurancePolicyProviderSAPId'),
                     "value" => $fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getCertificate() !== null && $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy() !== null && $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getPolicyCompany() !== null
-                        ? sprintf(
-                            "%s | %s",
-                            $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getPolicyCompany()->getProviderSAPId(),
-                            $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getPolicyCompany()->getName()
-                        )
-                        : null
+                        ? $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getPolicyCompany()->getProviderSAPId() : null
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('policyNumber'),
@@ -524,11 +342,7 @@ class ExportExcelFleetCommandHandler
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('cancelationDate'),
-                    "value" => $fleet->getAnexoLine() !== null && $fleet->getAnexoLine()->getCertificate() !== null ?
-                        ($fleet->getAnexoLine()->getCertificate()->getInsurancePolicy() !== null && $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getDeactivationDate() !== null ?
-                            $fleet->getAnexoLine()->getCertificate()->getInsurancePolicy()->getDeactivationDate()->__toString('d/m/Y')
-                            : ($fleet->getAnexoLine()->getCertificate()->getDeactivationDate() !== null ? $fleet->getAnexoLine()->getCertificate()->getDeactivationDate()->__toString('d/m/Y') : null))
-                        : null
+                    "value" => null,    // TODO pendiente de rellenar
                 ],
                 [
                     "title" => FleetExcelColumns::getNameById('finishDate'),
@@ -653,9 +467,7 @@ class ExportExcelFleetCommandHandler
             ];
         }
 
-        [$tempFile, $fileName] = $this->fileRepository->export($fleetList, $dropdownLists);
-
-        return new ExportExcelFleetResponse($tempFile, $fileName);
+        return new ExportExcelFleetResponse($fleetList);
     }
 
 
@@ -736,250 +548,5 @@ class ExportExcelFleetCommandHandler
         $criteria = new FleetCriteria($filterCollection);
 
         return $criteria;
-    }
-
-    /**
-     * @return array
-     */
-    private function setDropDownList(): array
-    {
-        $providerCollection = $this->providerRepository->getBy(new ProviderCriteria())->getCollection()->toArray();
-        $saleMethodCollection = $this->saleMethodRepository->getBy(new SaleMethodCriteria())->getCollection()->toArray();
-        $purchaseTypeCollection = $this->purchaseTypeRepository->getBy(new PurchaseTypeCriteria())->getCollection()->toArray();
-        $trimCollection = $this->trimRepository->getBy(new TrimCriteria())->getCollection()->toArray();
-        $motorizationTypeCollection = $this->motorizationTypeRepository->getBy(new MotorizationTypeCriteria())->getCollection()->toArray();
-        $gearBoxCollection = $this->gearBoxRepository->getBy(new GearBoxCriteria())->getCollection()->toArray();
-        $colorMIRCollection = $this->colorMIRRepository->getBy(new ColorMIRCriteria())->getCollection()->toArray();
-        $vehicleSeatsCollection = $this->vehicleSeatsRepository->getBy(new VehicleSeatsCriteria())->getCollection()->toArray();
-        $vehicleTypeCollection = $this->vehicleTypeRepository->getBy(new VehicleTypeCriteria())->getCollection()->toArray();
-        $vehicleGroupCollection = $this->vehicleGroupRepository->getBy(new CarGroupCriteria())->getCollection()->toArray();
-        $acrissCollection = $this->acrissRepository->getBy(new AcrissCriteria())->getCollection()->toArray();
-        $locationCollection = $this->locationRepository->getBy(new LocationCriteria())->getCollection()->toArray();
-        $vehicleStatusCollection = $this->vehicleStatusRepository->getBy(new VehicleStatusCriteria())->getCollection()->toArray();
-
-        usort($providerCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $providerList = array_map(function ($provider) {
-            /**
-             * @var Provider $provider
-             */
-            return sprintf("%s | %s", $provider->getProviderSAPId(), $provider->getName());
-        }, $providerCollection);
-        $customerList = array_map(function ($customer) {
-            /**
-             * @var Provider $customer
-             */
-            return sprintf("%s | %s", $customer->getCustomerSAPId(), $customer->getName());
-        }, $providerCollection);
-
-        usort($saleMethodCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $saleMethodList = array_map(function ($saleMethod) {
-            /**
-             * @var SaleMethod $saleMethod
-             */
-            return $saleMethod->getName();
-        }, $saleMethodCollection);
-
-        usort($purchaseTypeCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $purchaseTypeList = array_map(function ($purchaseType) {
-            /**
-             * @var PurchaseType $purchaseType
-             */
-            return $purchaseType->getName();
-        }, $purchaseTypeCollection);
-
-        usort($trimCollection, function ($a, $b) {
-            $brandComparison = strcmp($a->getBrand() ? $a->getBrand()->getName() : '', $b->getBrand() ? $b->getBrand()->getName() : '');
-            if ($brandComparison !== 0) {
-                return $brandComparison;
-            }
-
-            $modelComparison = strcmp($a->getModel() ? $a->getModel()->getName() : '', $b->getModel() ? $b->getModel()->getName() : '');
-            if ($modelComparison !== 0) {
-                return $modelComparison;
-            }
-
-            return strcmp($a->getName(), $b->getName());
-        });
-        $trimList = array_map(function ($trim) {
-            /**
-             * @var Trim $trim
-             */
-            return sprintf(
-                "%s | %s %s %s",
-                $trim->getId(),
-                $trim->getBrand() ? $trim->getBrand()->getName() : null,
-                $trim->getModel() ? $trim->getModel()->getName() : null,
-                $trim->getName()
-            );
-        }, $trimCollection);
-
-        usort($motorizationTypeCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $motorizationTypeList = array_map(function ($motorizationType) {
-            /**
-             * @var MotorizationType $motorizationType
-             */
-            return $motorizationType->getName();
-        }, $motorizationTypeCollection);
-
-        usort($gearBoxCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $gearBoxList = array_map(function ($gearBox) {
-            /**
-             * @var GearBox $gearBox
-             */
-            return $gearBox->getName();
-        }, $gearBoxCollection);
-
-        usort($colorMIRCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $colorMIRList = array_map(function ($colorMIR) {
-            /**
-             * @var ColorMIR $colorMIR
-             */
-            return $colorMIR->getName();
-        }, $colorMIRCollection);
-
-        usort($vehicleSeatsCollection, function ($a, $b) {
-            return strcmp($a->getValue(), $b->getValue());
-        });
-        $vehicleSeatsList = array_map(function ($vehicleSeats) {
-            /**
-             * @var VehicleSeats $vehicleSeats
-             */
-            return $vehicleSeats->getValue();
-        }, $vehicleSeatsCollection);
-
-        usort($vehicleTypeCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $vehicleTypeList = array_map(function ($vehicleType) {
-            /**
-             * @var VehicleType $vehicleType
-             */
-            return $vehicleType->getName();
-        }, $vehicleTypeCollection);
-
-        usort($vehicleGroupCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $vehicleGroupList = array_map(function ($vehicleGroup) {
-            /**
-             * @var CarGroup $vehicleGroup
-             */
-            return $vehicleGroup->getName();
-        }, $vehicleGroupCollection);
-
-        usort($acrissCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $acrissList = array_map(function ($acriss) {
-            /**
-             * @var Acriss $acriss
-             */
-            return sprintf(
-                "%s (%s)",
-                $acriss->getName(),
-                $acriss->getVehicleGroup() ? $acriss->getVehicleGroup()->getName() : null
-            );
-        }, $acrissCollection);
-
-        usort($locationCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $locationList = array_map(function ($location) {
-            /**
-             * @var Location $location
-             */
-            return $location->getName();
-        }, $locationCollection);
-
-        usort($vehicleStatusCollection, function ($a, $b) {
-            return strcmp($a->getName(), $b->getName());
-        });
-        $vehicleStatusList = array_map(function ($vehicleStatus) {
-            /**
-             * @var VehicleStatus $vehicleStatus
-             */
-            return $vehicleStatus->getName();
-        }, $vehicleStatusCollection);
-
-        $dropdownLists = [
-            FleetExcelColumns::getNameById('providerSAPId') => [
-                'values' => $providerList,
-                'allowBlank' => !FleetExcelColumns::getById('providerSAPId')['required'],
-            ],
-            FleetExcelColumns::getNameById('saleMethod') => [
-                'values' => $saleMethodList,
-                'allowBlank' => !FleetExcelColumns::getById('saleMethod')['required'],
-            ],
-            FleetExcelColumns::getNameById('purchaseType') => [
-                'values' => $purchaseTypeList,
-                'allowBlank' => !FleetExcelColumns::getById('purchaseType')['required'],
-            ],
-            FleetExcelColumns::getNameById('customerSAPId') => [
-                'values' => $customerList,
-                'allowBlank' => !FleetExcelColumns::getById('customerSAPId')['required'],
-            ],
-            FleetExcelColumns::getNameById('trimId') => [
-                'values' => $trimList,
-                'allowBlank' => !FleetExcelColumns::getById('trimId')['required'],
-            ],
-            FleetExcelColumns::getNameById('motorizationType') => [
-                'values' => $motorizationTypeList,
-                'allowBlank' => !FleetExcelColumns::getById('motorizationType')['required'],
-            ],
-            FleetExcelColumns::getNameById('gearBox') => [
-                'values' => $gearBoxList,
-                'allowBlank' => !FleetExcelColumns::getById('gearBox')['required'],
-            ],
-            FleetExcelColumns::getNameById('colorMIR') => [
-                'values' => $colorMIRList,
-                'allowBlank' => !FleetExcelColumns::getById('colorMIR')['required'],
-            ],
-            FleetExcelColumns::getNameById('vehicleSeats') => [
-                'values' => $vehicleSeatsList,
-                'allowBlank' => !FleetExcelColumns::getById('vehicleSeats')['required'],
-            ],
-            FleetExcelColumns::getNameById('vehicleType') => [
-                'values' => $vehicleTypeList,
-                'allowBlank' => !FleetExcelColumns::getById('vehicleType')['required'],
-            ],
-            FleetExcelColumns::getNameById('vehicleGroup') => [
-                'values' => $vehicleGroupList,
-                'allowBlank' => !FleetExcelColumns::getById('vehicleGroup')['required'],
-            ],
-            FleetExcelColumns::getNameById('acriss') => [
-                'values' => $acrissList,
-                'allowBlank' => !FleetExcelColumns::getById('acriss')['required'],
-            ],
-            FleetExcelColumns::getNameById('receptionLocation') => [
-                'values' => $locationList,
-                'allowBlank' => !FleetExcelColumns::getById('receptionLocation')['required'],
-            ],
-            FleetExcelColumns::getNameById('insurancePolicyProviderSAPId') => [
-                'values' => $providerList,
-                'allowBlank' => !FleetExcelColumns::getById('insurancePolicyProviderSAPId')['required'],
-            ],
-            FleetExcelColumns::getNameById('actualLocation') => [
-                'values' => $locationList,
-                'allowBlank' => !FleetExcelColumns::getById('actualLocation')['required'],
-            ],
-            FleetExcelColumns::getNameById('vehicleStatus') => [
-                'values' => $vehicleStatusList,
-                'allowBlank' => !FleetExcelColumns::getById('vehicleStatus')['required'],
-            ],
-        ];
-
-        return $dropdownLists;
     }
 }
